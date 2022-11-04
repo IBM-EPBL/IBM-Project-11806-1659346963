@@ -1,0 +1,58 @@
+
+// C++ code
+//
+int trig=4;
+int echo=3;
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(12, OUTPUT);
+  pinMode(2, OUTPUT);
+  pinMode(8,INPUT);
+  pinMode(7,OUTPUT);
+  pinMode(trig,OUTPUT);
+  pinMode(echo,INPUT);
+  
+}
+
+void loop()
+{
+  float dur=pulseIn(echo,HIGH);
+  float dist=(dur*0.0343)/2;
+  int m=digitalRead(8);
+  double a=analogRead(A3);
+  double v=a/1024;
+  double tvolt=v*5;
+  double o=tvolt-0.5;
+  double t=o*100;
+  if (t>50)
+  {
+  digitalWrite(2,HIGH);
+  }
+  else
+  {
+  digitalWrite(2,LOW);
+  }
+    if(m==1)
+    {
+      digitalWrite(12, HIGH);;
+    }
+  else
+  {
+   digitalWrite(12, LOW); 
+  }
+  //digitalWrite(trig,LOW);
+  //digitalWrite(trig,HIGH);
+  
+  if(dist<=100)
+  {
+  digitalWrite(7,HIGH);
+    
+  }
+  else
+  {
+    digitalWrite(7,LOW);
+    
+  }
+  
+}
